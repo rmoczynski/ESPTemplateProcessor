@@ -114,6 +114,8 @@ class ESPTemplateProcessor {
           Serial.print("Failed to process '"); Serial.print(filePath); Serial.println("': Didn't reach the end of the file.");
         }
       }
+      //this suppresses the warning 'not all control paths return a value'
+      return false;
     }
 
 
