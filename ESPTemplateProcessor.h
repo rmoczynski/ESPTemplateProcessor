@@ -89,7 +89,11 @@ class ESPTemplateProcessor {
           if(!silentSerial) {
             Serial.print("Lookup '"); Serial.print(keyBuffer); Serial.print("' received: "); Serial.println(processed);
           }
-          server.sendContent(processed);
+          //this if-statement prevents the webserver to toggle the _chunked-flag, if the value of
+          //processed is empty (this leads to server.sendContent(""), and this toggles _chunked). 
+          if(processed.length() > 0) {
+            server.sendContent(processed);
+          }
         } else {
           bufferLen++;
           buffer += ch;
